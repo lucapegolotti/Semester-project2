@@ -1,5 +1,5 @@
-function LcX = applyLc(A0,A1,c,X,tau)
-stepsize = tau/(2*1000);                     % Setting stepsize to 1/100 of the domain
+function LcX = applyLc(A0,A1,c,X,tau,nsteps)
+stepsize = tau/(2*nsteps);                     
 [Z1,Z2] = solveODE(A0,A1,X,tau/2,stepsize);
 n = size(A0);
 Z1 = reshape(Z1,n);

@@ -1,6 +1,6 @@
-function X = GMRESforLcx(A0,A1,c,Xin,tau,W,tol)
+function [X,k] = GMRESforLcx(A0,A1,c,Xin,tau,W,tol,nsteps)
 n = size(A0);
-Lc = @(x) vec(applyLc(A0,A1,c,reshape(x,n),tau));
+Lc = @(x) vec(applyLc(A0,A1,c,reshape(x,n),tau,nsteps));
 b = vec(W);
 x0 = vec(Xin);
 r = b - Lc(x0);
