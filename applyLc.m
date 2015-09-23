@@ -1,3 +1,9 @@
-function LX = applyLc(A0,A1,c,X)
-
-
+function LcX = applyLc(A0,A1,c,X,tau)
+stepsize = tau/(2*1000);                     % Setting stepsize to 1/100 of the domain
+[Z1,Z2] = solveODE(A0,A1,X,tau/2,stepsize);
+n = size(A0);
+Z1 = reshape(Z1,n);
+Z2 = reshape(Z2,n);
+Z2 = Z2';
+I = eye(n(1));
+LcX = Z2' * (A0 - c*I) + (A0' + c*I)*Z2+Z1' * A1 + A1' * Z1;

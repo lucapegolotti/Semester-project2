@@ -6,7 +6,10 @@ x1 = vec(X);
 x2 = vec(X');
 x = [x1;x2];                                          % Setting initial condition for Z1 and Z2
 A = assembleA(A0,A1,n);
-z = explicitEuler(A,x,stepsize,0,tau);  % I temporarly use explicitEuler for simplicity
+%z = explicitEuler(A,x,stepsize,0,tau/2);  % I temporarly use explicitEuler for simplicity
+f
+z = ode45(f,[0,tau/2],x);
+
 Z1 = z(1:n^2);
 Z2 = z(n^2+1:end);
 
