@@ -1,6 +1,6 @@
 function LcX = applyLc(A0,A1,c,X,tau,nsteps)
 stepsize = tau/(2*nsteps);                     
-[Z1,Z2] = solveODE(A0,A1,X,tau/2,stepsize);
+[Z1,Z2] = solveODE(A0,A1,X,tau/2,stepsize,'RK4');
 n = size(A0);
 Z1 = reshape(Z1,n);
 Z2 = reshape(Z2,n);

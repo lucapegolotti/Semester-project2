@@ -9,7 +9,7 @@ A1 = alpha*diag([-1,-0.5,0,0.5]);
 W = eye(n);
 Xin = zeros(n);
 nsteps = 100;
-X = GMRESforLcx(A0,A1,1,Xin,1,-W,1e-3,nsteps);                  
+X = GMRESforLcx(A0,A1,1,Xin,1,-W,1e-2,nsteps);                  
 L = retrieveOperator(A0,A1,1,1,nsteps);
 
 %% 
@@ -24,7 +24,7 @@ n = size(A0,1);
 A1 = alpha*diag([-1,-0.5,0,0.5]);
 W = eye(n);
 Xin = zeros(n);
-m = 10;
+m = 4;
 cc = zeros(m,1);
 for i=1:m
     nsteps = i*100;
