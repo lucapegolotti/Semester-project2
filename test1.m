@@ -1,4 +1,4 @@
-%%
+%% This code reproduces the first test of the paper. To change method, change the argument of solveODE in applyLC
 clear all
 clc
 
@@ -9,10 +9,14 @@ A1 = alpha*diag([-1,-0.5,0,0.5]);
 W = eye(n);
 Xin = zeros(n);
 nsteps = 100;
-X = GMRESforLcx(A0,A1,1,Xin,1,-W,1e-2,nsteps);                  
+X = GMRESforLcx(A0,A1,1,Xin,1,-W,1e-5,nsteps);                  
 L = retrieveOperator(A0,A1,1,1,nsteps);
 
-%% 
+display('Solution of Linear system')
+X
+
+[100*X(:),-100*(L\vec(W))]
+%% This code computes the condition number of the operator matrix with different time steps for the ODE system
 clear all
 clc
 % plot the condition number of the matrix against the number of timesteps
