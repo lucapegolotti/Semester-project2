@@ -9,7 +9,7 @@ A1 = alpha*diag([-1,-0.5,0,0.5]);
 W = eye(n);
 Xin = zeros(n);
 nsteps = 100;
-X = GMRESforLcx(A0,A1,1,Xin,1,-W,1e-5,nsteps);                  
+X = GMRESforLcx(A0,A1,1,Xin,1,-W,1e-3,nsteps);                  
 L = retrieveOperator(A0,A1,1,1,nsteps);
 
 display('Solution of Linear system')

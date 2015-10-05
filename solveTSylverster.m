@@ -7,7 +7,6 @@ function X = solveTSylverster(A,B,C)
 [R,S,U,V] = qz(A,B');
 U = U';
 V = V';
-E = U'*C*conj(U)
-[W] = auxTSylvester(R,S,E);     % step 3 of algorithm
-R*W + conj(W')*conj(S')
+E = U'*C*conj(U);
+[W] = auxTSylvester(R,S,E);                          % step 3 of algorithm
 X = V'*W*conj(U');
