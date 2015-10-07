@@ -1,4 +1,6 @@
 function L = applyPreconditioner(z,A0,c,tau)
+% Function that apply the preconditioner to vector Z
+
 Z = reshape(z,size(A0));
 n = size(A0,1);
 A = A0' + c*eye(n);

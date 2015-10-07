@@ -1,7 +1,7 @@
 function LcX = applyLc(A0,A1,c,X,tau,nsteps)
 % check that X is a matrix 
 stepsize = tau/(2*nsteps);                     
-[Z1,Z2] = solveODE(A0,A1,X,tau/2,stepsize,'FWDEULER');
+[Z1,Z2] = solveODE(A0,A1,X,tau/2,stepsize,'ODE45');
 n = size(A0);
 Z1 = reshape(Z1,n);
 Z2 = reshape(Z2,n);

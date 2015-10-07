@@ -4,9 +4,11 @@ function X = solveTSylverster(A,B,C)
 % Efficient solution of the Sylvester equation for *-congruence" [de Teran,
 % Dopico]. The Algorithm assumes A,B,C real matrices.
 
-[R,S,U,V] = qz(A,B');
+[R,S,U,V] = qz(A,B');    % use 'real' 
 U = U';
 V = V';
 E = U'*C*conj(U);
 [W] = auxTSylvester(R,S,E);                          % step 3 of algorithm
 X = V'*W*conj(U');
+Xr = real(X);
+X = Xr;
