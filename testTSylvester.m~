@@ -3,7 +3,7 @@ clc
 
 % Test for the solution of the T-Sylvester equation A*X + X'*B = C
 
-n = 100;
+n = 400;
 A = rand(n);
 B = rand(n);
 C = rand(n);

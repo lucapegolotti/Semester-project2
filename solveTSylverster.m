@@ -14,14 +14,9 @@ if (nargin<4)
     X = Xr; 
 else
     if (strcmp(varargin{1},'REAL'))
-        if (mod(size(A,1),2)~=0 || size(A,1)~=size(A,2))
-            error('Matrices must be square and with even number of rows and col');
-        end
         [R,S,U,V] = qz(A,B','real');    % use 'real' 
-        returnDiagonalBlocksDimension(R)
         U = U';
         V = V';
-        R
         E = U'*C*conj(U);
         [W] = auxTSylvesterReal(R,S,E);     % step 3 of algorithm
         X = V'*W*U';
