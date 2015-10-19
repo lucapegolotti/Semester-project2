@@ -9,7 +9,7 @@ n = size(A0,1);
 A1 = alpha*diag([-1,-0.5,0,0.5]);
 W = eye(n);
 Xin = zeros(n);
-nsteps = 400;
+nsteps = 1000;
 tau = 1;
 c = 1;
 % Defining the linear operator

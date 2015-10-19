@@ -12,7 +12,8 @@ Xin = zeros(n);
 nsteps = 400;
 tau = 1;
 c = 1;
-er1 = zeros(16,5);
+er = zeros(16,5);
+erBCGstab = zeros(16,5);
 count = 0;
 for alpha = alphavec
     count = count + 1
@@ -25,14 +26,36 @@ for alpha = alphavec
         [X] = gmres(fun,-vec(W),[],1e-16,maxit,prec);
         L = retrieveOperator(A0,A1,1,1,nsteps);
         er(maxit,count) = norm(X-L\(-vec(W)),'fro');
+        [X] = bicgstab(fun,-vec(W),1e-16,maxit,prec);
+        erBCGstab(maxit,count) = norm(X-L\(-vec(W)),'fro');
     end
 end
-
-semilogy(1:16,er(:,1),'-x','Linewidth',2)
+%%
+semilogy(1:16,erBCGstab(:,1),'-xk','Linewidth',2,'Markersize',10)
 hold on
-semilogy(1:16,er(:,2),'-x','Linewidth',2)
-semilogy(1:16,er(:,3),'-x','Linewidth',2)
-semilogy(1:16,er(:,4),'-x','Linewidth',2)
-semilogy(1:16,er(:,5),'-x','Linewidth',2)
-legend('GMRES, norm A1 = 10^-3','GMRES, norm A1 = 10^-2','GMRES, norm A1 = 10^-1','GMRES, norm A1 = 10^0','GMRES, norm A1 = 10^1')
+semilogy(1:16,erBCGstab(:,2),'-ok','Linewidth',2,'Markersize',10)
+semilogy(1:16,erBCGstab(:,3),'-sk','Linewidth',2,'Markersize',10)
+semilogy(1:16,erBCGstab(:,4),'-dk','Linewidth',2,'Markersize',10)
+semilogy(1:16,erBCGstab(:,5),'-^k','Linewidth',2,'Markersize',10)
+semilogy(1:16,er(:,1),'--xr','Linewidth',2,'Markersize',10)
+semilogy(1:16,er(:,2),'--or','Linewidth',2,'Markersize',10)
+semilogy(1:16,er(:,3),'--sr','Linewidth',2,'Markersize',10)
+semilogy(1:16,er(:,4),'--dr','Linewidth',2,'Markersize',10)
+semilogy(1:16,er(:,5),'--^r','Linewidth',2,'Markersize',10)
+I = legend('BCGstab $ \|A1\| = 10^{-3}$', ...
+           'BCGstab $ \|A1\| = 10^{-2}$', ...
+           'BCGstab $ \|A1\| = 10^{-1}$', ...
+           'BCGstab,$ \|A1\| = 10^{0}$',  ...
+           'BCGstab,$ \|A1\| = 10^{1}$',  ...
+           'GMRES $ \|A1\| = 10^{-3}$',   ...
+           'GMRES $ \|A1\| = 10^{-2}$',   ...
+           'GMRES $ \|A1\| = 10^{-1}$',   ...
+           'GMRES $ \|A1\| = 10^{0}$',    ...
+           'GMRES $ \|A1\| = 10^{1}$')
+set(I,'Interpreter','Latex');
 hold off
+set(gca,'fontsize', 18)
+grid on
+ylabel('Relative error');
+xlabel('Iteration');
+axis([1 16 1e-13 1])
